@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+ 
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
