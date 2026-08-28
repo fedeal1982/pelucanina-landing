@@ -26,10 +26,22 @@ const SolicitarTurno = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
+    try {
+      const response = await fetch('https://pelucanina-v2.onrender.com/api/solicitudes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      if (response.ok) {
+        navigate('/turno-enviado', { state: { nombre: formData.nombre, servicio: formData.servicio } });
+      } else {
+        alert('Error al enviar la solicitud. Intentá de nuevo.');
+      }
+    } catch (error) {
+      alert('Error de conexión. Intentá de nuevo.');
+    } finally {
       setLoading(false);
-      navigate('/turno-enviado', { state: { nombre: formData.nombre, servicio: formData.servicio } });
-    }, 1500);
+    }
   };
 
   return (
